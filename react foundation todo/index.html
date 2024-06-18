@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo app</title>
+</head>
+<body>
+    <input id="title" type="text" placeholder="title">
+    <br>
+    <br>
+    <input id="desc" type="text" placeholder="description">
+    <br>
+    <br>
+    <button onclick="show_todo()" id="add"> add todo </button>
+    <br>
+    <br>
+    <div id="container"> </div> 
+
+
+
+    <script> 
+    let globalId = 1
+    
+    function MarkasDone(todoid){
+        console.log(todoid)
+        let todo = document.getElementById(todoid);
+        console.log(todo)
+        todo.children[2].innerHTML = "Done";
+        
+    }
+
+    function createChild(title,description,id){
+        // created simple elements as
+        // <div> parentchild
+        //      <div> title </div>
+        //      <div> description </div>
+        //      <button> mark as done </button>
+        //  </div>
+        let parentchild = document.createElement("div");
+        let title_child = document.createElement('div') 
+        let desp_child = document.createElement('div') 
+        let butn_child = document.createElement('button') 
+        // adding data into them.
+        title_child.innerHTML = title;
+        desp_child.innerHTML = description;
+        butn_child.innerHTML = "Mark as Done";
+        // when "mark as done" button is clicked, change its content to "DONE".
+        console.log(id)
+        butn_child.setAttribute("onclick", `MarkasDone(${id})`); 
+ 
+        // making child or connections
+        parentchild.appendChild(title_child);
+        parentchild.appendChild(desp_child);
+        parentchild.appendChild(butn_child);
+        
+        // setting attribute as id = 1,2,3,4...
+        parentchild.setAttribute("id",id)
+        return parentchild
+
+    }
+    function show_todo(){
+        console.log("hi")
+        let title  = document.getElementById("title").value
+        let description  = document.getElementById("desc").value
+        let container = document.getElementById("container")
+        outerchild = createChild(title,description,globalId++)
+        console.log(outerchild)
+        container.appendChild(outerchild)
+    }
+    </script>
+</body>
+</html>
