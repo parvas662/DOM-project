@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id ="mydiv"> 
+        <p> first child </p>
+        <p> second child </p>
+        <p> third child </p>
+        <p> fourth child </p>
+        <p> fifth child </p>
+        
+    </div>
+    <script>
+        function alertmsg(event){ // passing event here because of console.log(event.) else dont need 
+            console.log("hi")  
+            console.log(event) 
+            alert("click on: " + event.target.textContent );
+            } 
+        let mydiv = document.getElementById('mydiv');
+        mydiv.addEventListener('click',alertmsg)
+
+    </script>
+
+</body>
+</html>
