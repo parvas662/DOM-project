@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let timeout;
+        function debounce(){
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                populateDiv()
+            }, 1000);
+        }
+        async function populateDiv(){
+            const principle = document.getElementById("principle").value;
+            const rate = document.getElementById("rate").value;
+            const time = document.getElementById("time").value;
+            // http://localhost:3000 
+
+            const response = await fetch("http://localhost:3000/interest?principle="+principle+"&rate="+rate+"&time="+time);
+            const ans = await response.json() ;
+            console.log(ans)
+            const formattedOutput = "Interest: " + ans.interest;
+            document.getElementById("finalSum").innerHTML = formattedOutput;
+
+        }
+    </script>   
+</head>
+<body>
+    <label >principle amount:</label> 
+    <input oninput="debounce()" id="principle" type="text" placeholder="Enter principle amount"> </input><br>
+<br>
+    <label  >Rate: </label>
+    <input oninput="debounce()" id="rate" type="text" placeholder="Enter rate"></input><br>
+    <br>
+    <label >Time: </label>
+    <input oninput="debounce()" id="time" type="text" placeholder="Enter time"></input><br>
+    <br>
+    <div id="finalSum"></div>
+    <br> 
+</body>
+</html>
