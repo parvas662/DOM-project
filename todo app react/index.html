@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="title" placeholder="enter title"> 
+    <br>
+    <br>
+    <input type="text" id="description" placeholder="enter description"> <br>
+    <br>
+    <button onclick='addtodo()' id="btn"> Add todo </button> <br>
+    <br>
+    <div id="container"> </div> 
+
+    <script>
+        let globalid = 1
+        function markdone(id){
+            const todoid = document.getElementById(id) 
+            todoid.children[2].innerHTML = "Done"
+        }
+        function child_divs(title,description,id){
+            // created simple elements as
+            // <div> parentchild
+            //      <div> title </div>
+            //      <div> description </div>
+            //      <button> mark as done </button>
+            //  </div>
+            const parent = document.createElement('div')
+            const ti = document.createElement('div')
+            const desp = document.createElement('div')
+            const markbtn = document.createElement('button')
+            
+            ti.innerHTML = title
+            desp.innerHTML = description;
+            markbtn.innerHTML = 'mark as done' ;
+            
+            //  change button as done when clicked.
+            markbtn.setAttribute('onclick',`markdone(${id})`)
+            //  make child of parent
+            parent.appendChild(ti)
+            parent.appendChild(desp)
+            parent.appendChild(markbtn)
+
+            parent.setAttribute('id',id)
+            return parent
+
+        }
+
+        function addtodo(){
+            console.log("hi")
+            const title  = document.getElementById("title").value
+            const description = document.getElementById('description').value
+            const container = document.getElementById('container')
+            // create elements
+            console.log(title,description)
+            const parentdiv = child_divs(title,description,globalid++)
+            container.appendChild(parentdiv)
+
+        }
+
+    </script>
+</body>
+</html>
